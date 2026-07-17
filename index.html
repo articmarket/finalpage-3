@@ -496,6 +496,47 @@
 
     /* Already Registered Specific Utilities */
     .stagger-el { opacity: 0; transform: translateY(15px); }
+
+    /* =========================================
+       6. Days Left Countdown Popup
+       ========================================= */
+    .countdown-popup {
+      position: fixed;
+      top: 16px;
+      left: 16px;
+      z-index: 50;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      background: #facc15;
+      padding: 6px 14px;
+      border-radius: 99px;
+      box-shadow: 0 4px 14px rgba(250, 204, 21, 0.4);
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-weight: 800;
+      font-size: 12px;
+      color: #0f1a0d;
+      opacity: 0;
+      transform: scale(0.8) translateY(-10px);
+    }
+    @media(min-width: 640px) {
+      .countdown-popup {
+        position: absolute;
+        top: 24px;
+        left: 24px;
+        padding: 8px 18px;
+        font-size: 13.5px;
+      }
+    }
+    .clock-anim svg { color: #0f1a0d; }
+    .clock-hand {
+      transform-origin: 12px 12px;
+      animation: clockSpin 3s linear infinite;
+    }
+    @keyframes clockSpin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
     
     @media (max-height: 650px) {
       .responsive-padding { padding-top: 2rem !important; padding-bottom: 2rem !important; }
@@ -706,6 +747,17 @@
         
         <div id="page-ending-card" class="w-full max-w-[520px] bg-white rounded-[32px] md:rounded-[40px] px-5 sm:px-6 md:px-10 shadow-[0_30px_60px_-15px_rgba(0,0,0,0.8)] flex flex-col items-center relative mx-auto text-center overflow-hidden">
             
+            <!-- Days Left Countdown Popup -->
+            <div class="countdown-popup">
+                <div class="clock-anim">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="10"></circle>
+                        <path class="clock-hand" d="M12 6v6l3 3"></path>
+                    </svg>
+                </div>
+                <span><span class="days-count-val">0</span> Days Left</span>
+            </div>
+
             <div id="success-wrapper" class="w-full overflow-hidden" style="height: 0; opacity: 0;">
                 <div id="success-inner" class="flex flex-col items-center w-full relative z-10 bg-white pt-12 sm:pt-10 pb-4 sm:pb-2 md:pb-3">
                     
@@ -724,16 +776,9 @@
                     
                     <p class="success-stagger text-slate-700 text-[13.5px] sm:text-[15px] font-semibold mb-6 sm:mb-5">Your wholesale access is fully secured.</p>
 
-                    <div class="success-stagger location-badge mb-3">
+                    <div class="success-stagger location-badge mb-2">
                         <span class="loc-dot"></span>
                         Rajapalayam — Location Soon
-                    </div>
-                    
-                    <div class="success-stagger flex items-center justify-center gap-1.5 bg-[#fefce8] border border-[#fef08a] text-[#854d0e] rounded-full px-3.5 py-1.5 font-bold text-[12.5px] sm:text-[13px] shadow-[0_2px_10px_rgba(250,204,21,0.15)] mx-auto w-max mt-2 mb-2">
-                        <svg class="w-4 h-4 sm:w-[18px] sm:h-[18px] text-[#eab308]" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
-                        </svg>
-                        <span><span class="days-count">0</span> Days Left to Open</span>
                     </div>
 
                 </div>
@@ -794,6 +839,17 @@
         <!-- Already Registered UI Card -->
         <div id="already-registered-card" class="w-full max-w-[500px] bg-white rounded-[28px] sm:rounded-[32px] md:rounded-[40px] p-6 xs:p-7 sm:p-8 md:p-10 shadow-[0_30px_60px_-15px_rgba(0,0,0,0.8)] flex flex-col items-center text-center my-auto relative overflow-hidden" style="opacity: 0; transform: translateY(40px) scale(0.96);">
             
+            <!-- Days Left Countdown Popup -->
+            <div class="countdown-popup">
+                <div class="clock-anim">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="10"></circle>
+                        <path class="clock-hand" d="M12 6v6l3 3"></path>
+                    </svg>
+                </div>
+                <span><span class="days-count-val">0</span> Days Left</span>
+            </div>
+
             <!-- Animated Icon Badge -->
             <div class="relative mb-5 sm:mb-6">
                 <div class="absolute inset-0 rounded-full border-[2.5px] border-[#facc15] pulse-ring-yellow"></div>
@@ -812,17 +868,9 @@
             </h2>
 
             <!-- Location Badge -->
-            <div class="stagger-el location-badge mb-3">
+            <div class="stagger-el location-badge mb-7 sm:mb-8">
                 <span class="loc-dot"></span>
                 Rajapalayam — Location Soon
-            </div>
-            
-            <!-- Countdown Badge -->
-            <div class="stagger-el mb-7 sm:mb-8 flex items-center justify-center gap-1.5 bg-[#fefce8] border border-[#fef08a] text-[#854d0e] rounded-full px-3.5 py-1.5 font-bold text-[12.5px] sm:text-[13px] shadow-[0_2px_10px_rgba(250,204,21,0.15)] mx-auto w-max mt-2">
-                <svg class="w-4 h-4 sm:w-[18px] sm:h-[18px] text-[#eab308]" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
-                </svg>
-                <span><span class="days-count">0</span> Days Left to Open</span>
             </div>
 
             <!-- Referral Section -->
@@ -861,27 +909,6 @@
   </div>
 
   <script>
-    // ==========================================
-    // CONFIGURATION
-    // ==========================================
-    const OPENING_DATE_STR = "29.07.2026"; // Enter the opening date here in DD.MM.YYYY format
-
-    function initCountdown() {
-        if (!OPENING_DATE_STR) return;
-        const [day, month, year] = OPENING_DATE_STR.split('.');
-        const openDate = new Date(`${year}-${month}-${day}T00:00:00`);
-        const today = new Date();
-        today.setHours(0, 0, 0, 0); // Reset time for an accurate full day difference
-        
-        const diffTime = openDate - today;
-        const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-        const displayDays = diffDays > 0 ? diffDays : 0;
-        
-        document.querySelectorAll('.days-count').forEach(el => {
-            el.innerText = displayDays;
-        });
-    }
-
     // Form Input Interactions
     function handleInput(input, fcId, chkId) {
         const fc = document.getElementById(fcId);
@@ -906,11 +933,37 @@
         window.open(url, '_blank');
     }
 
+    // ==========================================
+    // Days Left Countdown Calculation Logic
+    // ==========================================
+    function initCountdown() {
+        // ENTER TARGET OPENING DATE BELOW (Format: DD.MM.YYYY)
+        // If it is set to a past date (like 02.07.2026 when today is July 17), the badge automatically hides itself.
+        const openingDateStr = '02.08.2026'; // Example future date (Aug 2, 2026) -> Outputs ~16 days from July 17
+        
+        const parts = openingDateStr.split('.');
+        if (parts.length === 3) {
+            const targetDate = new Date(`${parts[2]}-${parts[1]}-${parts[0]}T00:00:00`);
+            const now = new Date();
+            const diffTime = targetDate - now;
+            const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+            
+            const badges = document.querySelectorAll('.days-count-val');
+            const popupContainers = document.querySelectorAll('.countdown-popup');
+            
+            if (diffDays > 0) {
+                badges.forEach(b => b.innerText = diffDays);
+            } else {
+                // Hide popup if the opening date has passed or is today
+                popupContainers.forEach(p => p.style.display = 'none');
+            }
+        }
+    }
+
     // Animations & State Setup
     window.addEventListener('DOMContentLoaded', () => {
-
-      // Initialize the countdown elements
-      initCountdown();
+      
+      initCountdown(); // Run the countdown calculation
 
       if (isAlreadyRegistered) {
           
@@ -920,7 +973,8 @@
           // Play Entrance Animations for "Already Registered" Card
           const tl = gsap.timeline({ delay: 0.2 });
           tl.to("#already-registered-card", { opacity: 1, y: 0, scale: 1, duration: 1.0, ease: "back.out(1.2)" })
-            .to(".stagger-el", { opacity: 1, y: 0, duration: 0.6, stagger: 0.1, ease: "power2.out" }, "-=0.4");
+            .to(".stagger-el", { opacity: 1, y: 0, duration: 0.6, stagger: 0.1, ease: "power2.out" }, "-=0.4")
+            .to("#page-already-registered .countdown-popup", { opacity: 1, scale: 1, y: 0, duration: 0.6, ease: "back.out(1.6)" }, "+=0.2");
           
       } else {
 
@@ -1072,8 +1126,9 @@
           
           .add(() => {
               document.getElementById('highlight-trigger').classList.add('active');
-          }, "showReward+=1.2");
+          }, "showReward+=1.2")
+          .to("#page-ending .countdown-popup", { opacity: 1, scale: 1, y: 0, duration: 0.6, ease: "back.out(1.6)" }, "showReward+=1.5");
     });
   </script>
 </body>
-</html>s
+</html>
