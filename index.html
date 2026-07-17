@@ -473,12 +473,12 @@
     .floating-gift { display: flex; justify-content: center; align-items: center; margin: 0 auto 10px auto; animation: floatGift 3s ease-in-out infinite; filter: drop-shadow(0 8px 12px rgba(250, 204, 21, 0.35)); }
 
     .whatsapp-btn {
-      display: flex; align-items: center; justify-content: center; gap: 8px; padding: 0 16px; height: 48px; border: none;
+      display: flex; align-items: center; justify-content: center; gap: 8px; padding: 0 16px; height: 54px; border: none;
       border-radius: 40px; cursor: pointer; position: relative; overflow: hidden; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
       background-color: #00d757; font-family: 'Plus Jakarta Sans', sans-serif; margin: 0 auto; z-index: 1; box-shadow: 0 8px 22px rgba(0, 215, 87, 0.4);
       animation: wpPulse 2.4s ease-in-out infinite; font-weight: 700; letter-spacing: 0.02em; color: white; font-size: 14px; width: 100%;
     }
-    @media(min-width: 640px) { .whatsapp-btn { gap: 10px; padding: 0 24px; height: 50px; font-size: 15px; } }
+    @media(min-width: 640px) { .whatsapp-btn { gap: 10px; padding: 0 24px; height: 57px; font-size: 15px; } }
 
     @keyframes wpPulse {
       0%, 100% { box-shadow: 0 8px 22px rgba(0, 215, 87, 0.4), 0 0 0 0 rgba(0, 215, 87, 0.55); }
@@ -564,7 +564,7 @@
       .floating-gift svg { width: 40px !important; height: 40px !important; }
       .referral-card h3 { font-size: 18px !important; margin-bottom: 4px !important; }
       .referral-card p { font-size: 12px !important; margin-bottom: 12px !important; }
-      .whatsapp-btn { height: 44px !important; font-size: 13px !important; }
+      .whatsapp-btn { height: 54px !important; font-size: 13px !important; }
       #reward-inner a { margin-top: 16px !important; }
     }
   </style>
@@ -1074,20 +1074,25 @@
     /* ==================================================
        4. TRANSITION LOGIC: FORM -> COVER (BACK BUTTON)
        ================================================== */
-    document.getElementById('trigger-back').addEventListener('click', (e) => {
-        e.preventDefault();
-        
-        // Swap visibility
-        document.getElementById('page-form').classList.replace('visible-page', 'hidden-page');
-        document.getElementById('page-cover').classList.replace('hidden-page', 'visible-page');
-        
-        // Reset form animations immediately for next entry
+/* ==================================================
+   4. TRANSITION LOGIC: FORM -> COVER (BACK BUTTON)
+   ================================================== */
+document.getElementById('trigger-back').addEventListener('click', (e) => {
+    e.preventDefault();
+    
+    // Swap visibility (Takes 0.6s / 600ms to fade out via CSS)
+    document.getElementById('page-form').classList.replace('visible-page', 'hidden-page');
+    document.getElementById('page-cover').classList.replace('hidden-page', 'visible-page');
+    
+    // WAIT 600ms for the CSS transition to finish before resetting the GSAP positions
+    setTimeout(() => {
         gsap.set("#page-form .gsap-card", { opacity: 0, y: 50, scale: 0.98 });
         gsap.set(".field", { opacity: 0, x: -16 });
         gsap.set(".submit-btn", { opacity: 0, y: 16 });
         gsap.set(".trust-row", { opacity: 0, y: 16 });
         gsap.set(".gsap-back-btn", { opacity: 0, scale: 0.5, x: -10, rotation: -20 });
-    });
+    }, 600);
+});
 
     /* ==================================================
        5. TRANSITION LOGIC: FORM -> SUCCESS (SUBMIT)
@@ -1113,7 +1118,7 @@
           .to("#checkmark-circle", { scale: 1, duration: 0.5, ease: "back.out(1.6)" }, "-=0.3")
           .to("#checkmark-tick", { strokeDashoffset: 0, duration: 0.35, ease: "power2.out" })
           .add(() => {
-              confetti({ particleCount: 130, spread: 80, origin: { y: 0.45, x: 0.5 }, colors: ['#ef4444', '#3b82f6', '#facc15', '#22c55e', '#a855f7', '#ec4899'] });
+              confetti({ particleCount: 130, spread: 80, origin: { y: 0.55, x: 0.5 }, colors: ['#ef4444', '#3b82f6', '#facc15', '#22c55e', '#a855f7', '#ec4899'] });
           }, "-=0.1")
           .to(".success-stagger", { opacity: 1, y: 0, duration: 0.45, stagger: 0.1, ease: "power2.out" }, "-=0.1")
           
@@ -1131,4 +1136,4 @@
     });
   </script>
 </body>
-</html>
+</html>bu
