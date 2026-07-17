@@ -649,6 +649,14 @@
               </span>
             </span>
           </button>
+          
+          <!-- Simple, clear, and direct FOMO -->
+          <div class="w-full flex justify-center relative mt-4 md:mt-0 md:h-0">
+            <div class="fomo-text flex items-center justify-center gap-1.5 text-gray-300 text-[12px] sm:text-[13.5px] font-medium font-bodyNew w-max opacity-0 md:absolute md:top-4">
+              <span class="text-[13px] sm:text-[14px]">⚡</span> 
+              <span>Limited early access closes soon</span>
+            </div>
+          </div>
 
         </main>
       </div>
@@ -987,6 +995,7 @@
           gsap.set('.highlighter-pill', { opacity: 0, scale: 0.2, y: 30, rotateX: 75, transformPerspective: 1000 });
           gsap.set('.registered-label', { opacity: 0, x: 15 });
           gsap.set('.cta-btn', { opacity: 0, scale: 0.85, y: 35 });
+          gsap.set('.fomo-text', { opacity: 0, y: 10 });
 
           // Play Intro
           tl.to('.logo-anim', { opacity: 1, y: 0, scale: 1, rotate: 0, duration: 2.0, ease: 'expo.out' }, '+=0.1');
@@ -1006,6 +1015,7 @@
           }, 'socialReveal+=0.4');
           
           tl.to('.cta-btn', { opacity: 1, scale: 1, y: 0, duration: 1.8, ease: 'back.out(1.4)' }, '-=1.3');
+          tl.to('.fomo-text', { opacity: 1, y: 0, duration: 1.2, ease: 'power4.out' }, '-=1.5');
           tl.to('#bg-image', { scale: 1.05, filter: 'brightness(1) contrast(1)', duration: 3.2, ease: 'power4.out' }, 0);
       }
 
@@ -1128,4 +1138,4 @@ document.getElementById('trigger-back').addEventListener('click', (e) => {
     });
   </script>
 </body>
-</html>
+</html>access
