@@ -155,20 +155,6 @@
       filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.5)); opacity: 0; 
     }
 
-    .pulse-dot {
-      position: relative; width: 10px; height: 10px;
-      background-color: var(--accent-green); border-radius: 50%;
-      box-shadow: 0 0 12px var(--accent-green); flex-shrink: 0;
-    }
-    .pulse-ring {
-      position: absolute; inset: 0; border-radius: 50%;
-      background-color: rgba(34, 197, 94, 0.7); animation: pulse 2s infinite;
-    }
-    @keyframes pulse {
-      0% { transform: scale(1); opacity: 0.8; }
-      100% { transform: scale(5); opacity: 0; }
-    }
-
     .title-wrapper { overflow: hidden; margin-bottom: 12px; }
     .hero-title {
       font-family: var(--font-display);
@@ -274,7 +260,6 @@
         backdrop-filter: blur(12px) !important; -webkit-backdrop-filter: blur(12px) !important;
         filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.3)) !important;
       }
-      .pulse-dot { width: 8px !important; height: 8px !important; box-shadow: 0 0 10px var(--accent-green) !important; }
       .hero-container {
         width: 100% !important; min-height: 100% !important; flex: 1 !important; max-width: 100% !important;
         display: flex !important; flex-direction: column !important; justify-content: space-between !important;
@@ -314,7 +299,6 @@
       .logo-anim > div { width: 36px !important; height: 36px !important; }
       .logo-anim span { font-size: 18px !important; }
       .location-label { top: 18px !important; right: 16px !important; font-size: 0.65rem !important; padding: 0.4rem 0.8rem !important; gap: 0.4rem !important; }
-      .pulse-dot { width: 6px !important; height: 6px !important; }
       .hero-title { font-size: 3.7rem !important; }
       .hero-subtext { font-size: 14px !important; margin-bottom: 1.5rem !important; }
       .social-proof { column-gap: 6px !important; }
@@ -599,10 +583,7 @@
         <main class="hero-container">
           
           <div class="location-label flex items-center justify-center gap-[1.5rem] text-[1.19rem] font-bold tracking-[0.35em] uppercase mb-4 drop-shadow-[0_2px_4px_rgba(0,0,0,0.5)]">
-            <div class="pulse-dot">
-              <div class="pulse-ring"></div>
-            </div>
-            Rajapalayam
+            📍 Rajapalayam
           </div>
 
           <div class="flex flex-col items-center justify-center flex-grow md:flex-grow-0 my-auto w-full">
@@ -661,7 +642,7 @@
           
           <!-- Simple, clear, and direct FOMO -->
           <div class="w-full flex justify-center relative mt-4 md:mt-0 md:h-0">
-            <div class="fomo-text flex items-center justify-center gap-1.5 text-gray-300 text-[12px] sm:text-[13.5px] font-medium font-bodyNew w-max opacity-0 md:absolute md:top-4">
+            <div class="fomo-text flex items-center justify-center gap-1.5 text-gray-300 text-[12px] sm:text-[13.5px] font-medium font-bodyNew w-max opacity-0 md:absolute md:top-8">
               <span class="text-[13px] sm:text-[14px]">⚡</span> 
               <span>Limited early access closes soon</span>
             </div>
@@ -674,9 +655,10 @@
     <!-- ================= PAGE 2: REGISTRATION FORM ================= -->
     <div id="page-form" class="font-body-new page-transition hidden-page w-full h-full min-h-[100dvh] flex flex-col justify-center items-center px-3.5 pt-8 pb-[72px] sm:py-10 sm:px-5 relative" style="grid-area: 1/1;">
         
-        <div class="absolute top-[52px] left-[32px] sm:fixed sm:top-8 sm:left-8 z-[100] gsap-back-btn">
-            <button id="trigger-back" class="group flex items-center justify-center w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 bg-transparent sm:bg-white rounded-full sm:shadow-[0_12px_24px_rgba(0,0,0,0.2)] transition-all sm:hover:bg-gray-100 active:scale-90 outline-none">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 sm:h-5 sm:w-5 md:h-6 md:w-6 text-[#9ca3af] sm:text-gray-800 transition-transform duration-300 group-hover:-translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <!-- Desktop Back Button (Hidden on Mobile) -->
+        <div class="hidden sm:block fixed top-8 left-8 z-[100] gsap-back-btn">
+            <button class="trigger-back-btn group flex items-center justify-center w-12 h-12 md:w-14 md:h-14 bg-white rounded-full shadow-[0_12px_24px_rgba(0,0,0,0.2)] transition-all hover:bg-gray-100 active:scale-90 outline-none">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 md:h-6 md:w-6 text-gray-800 transition-transform duration-300 group-hover:-translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M15 19l-7-7 7-7" />
                 </svg>
             </button>
@@ -684,6 +666,15 @@
 
         <div class="w-full flex-1 sm:flex-none h-auto min-h-[400px] sm:min-h-0 max-w-[520px] max-h-full bg-white rounded-[26px] sm:rounded-[32px] md:rounded-[40px] px-6 py-7 sm:px-7 sm:pt-14 sm:pb-[48px] md:px-12 md:pt-[75px] md:pb-[53px] shadow-[0_20px_40px_-10px_rgba(0,0,0,0.3)] sm:shadow-[0_30px_60px_-15px_rgba(0,0,0,0.7)] flex flex-col justify-center relative mt-0 sm:mt-0 gsap-card mx-auto">
             
+            <!-- Mobile Back Button (Inside Card, Hidden on Desktop) -->
+            <div class="block sm:hidden absolute top-5 left-5 z-[100] gsap-back-btn">
+                <button class="trigger-back-btn group flex items-center justify-center w-10 h-10 bg-transparent rounded-full transition-all active:scale-90 outline-none">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-[#9ca3af] transition-transform duration-300 group-hover:-translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M15 19l-7-7 7-7" />
+                    </svg>
+                </button>
+            </div>
+
             <div class="mb-8 sm:mb-[36px] w-full text-center mt-3 sm:mt-0">
                 <h2 class="font-heading-new text-[34px] sm:text-4xl md:text-[46px] font-black tracking-[-0.01em] leading-none flex justify-center items-center gap-2 sm:block">
                     <span class="text-[#22c55e] uppercase">ARTIC</span> <span class="text-[#facc15] uppercase">MARKET</span>
@@ -1087,25 +1078,24 @@
     /* ==================================================
        4. TRANSITION LOGIC: FORM -> COVER (BACK BUTTON)
        ================================================== */
-/* ==================================================
-   4. TRANSITION LOGIC: FORM -> COVER (BACK BUTTON)
-   ================================================== */
-document.getElementById('trigger-back').addEventListener('click', (e) => {
-    e.preventDefault();
-    
-    // Swap visibility (Takes 0.6s / 600ms to fade out via CSS)
-    document.getElementById('page-form').classList.replace('visible-page', 'hidden-page');
-    document.getElementById('page-cover').classList.replace('hidden-page', 'visible-page');
-    
-    // WAIT 600ms for the CSS transition to finish before resetting the GSAP positions
-    setTimeout(() => {
-        gsap.set("#page-form .gsap-card", { opacity: 0, y: 50, scale: 0.98 });
-        gsap.set(".field", { opacity: 0, x: -16 });
-        gsap.set(".submit-btn", { opacity: 0, y: 16 });
-        gsap.set(".trust-row", { opacity: 0, y: 16 });
-        gsap.set(".gsap-back-btn", { opacity: 0, scale: 0.5, x: -10, rotation: -20 });
-    }, 600);
-});
+    document.querySelectorAll('.trigger-back-btn').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            e.preventDefault();
+            
+            // Swap visibility (Takes 0.6s / 600ms to fade out via CSS)
+            document.getElementById('page-form').classList.replace('visible-page', 'hidden-page');
+            document.getElementById('page-cover').classList.replace('hidden-page', 'visible-page');
+            
+            // WAIT 600ms for the CSS transition to finish before resetting the GSAP positions
+            setTimeout(() => {
+                gsap.set("#page-form .gsap-card", { opacity: 0, y: 50, scale: 0.98 });
+                gsap.set(".field", { opacity: 0, x: -16 });
+                gsap.set(".submit-btn", { opacity: 0, y: 16 });
+                gsap.set(".trust-row", { opacity: 0, y: 16 });
+                gsap.set(".gsap-back-btn", { opacity: 0, scale: 0.5, x: -10, rotation: -20 });
+            }, 600);
+        });
+    });
 
     /* ==================================================
        5. TRANSITION LOGIC: FORM -> SUCCESS (SUBMIT)
