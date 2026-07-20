@@ -44,7 +44,7 @@
           <style>
             #page-cover { opacity: 0 !important; visibility: hidden !important; pointer-events: none !important; z-index: 0 !important; }
             #page-already-registered { opacity: 1 !important; visibility: visible !important; transform: translateY(0) scale(1) !important; pointer-events: auto !important; z-index: 10 !important; }
-            #bg-image { filter: brightness(1) contrast(1) !important; transform: scale(1.05) !important; }
+            #bg-image { opacity: 1 !important; transform: scale(1) !important; }
           </style>
         `);
     }
@@ -130,7 +130,7 @@
     .viewport-container {
       position: relative;
       width: 100%;
-      min-height: 100vh;
+      height: 100%; /* Fits perfectly to the absolute wrapper */
       display: flex;
       flex-direction: column;
       justify-content: center;
@@ -288,6 +288,7 @@
       .cta-btn {
         width: 100% !important; display: flex !important; justify-content: flex-end !important; align-items: center !important;
         padding: 0.75rem !important; margin-top: auto !important; margin-bottom: 0 !important;
+        top: 4px !important;
       }
       .cta-btn .btn-text {
         position: absolute !important; left: 50% !important; transform: translateX(-50%) !important;
@@ -562,7 +563,7 @@
     <div id="page-cover" class="page-transition visible-page w-full h-full relative" style="grid-area: 1/1;">
       
       <!-- Top-Left Corner Logo -->
-      <div class="absolute top-6 left-6 md:top-10 md:left-12 z-20 logo-anim flex items-center gap-3.5">
+      <div class="absolute top-6 left-6 md:top-8 md:left-10 z-20 logo-anim flex items-center gap-3.5">
         <div class="w-12 h-12 md:w-14 md:h-14 bg-white rounded-full flex items-center justify-center shadow-[0_0_15px_rgba(255,255,255,0.15)] shrink-0">
           <span class="text-[#22c55e] font-heading-new font-[900] text-[22px] md:text-[26px] leading-none pt-[2px]">A</span>
         </div>
@@ -641,7 +642,7 @@
           </button>
           
           <!-- Simple, clear, and direct FOMO -->
-          <div class="w-full flex justify-center relative mt-4 md:mt-0 md:h-0">
+          <div class="w-full flex justify-center relative mt-4 md:mt-0 md:h-0 max-md:top-[4px]">
             <div class="fomo-text flex items-center justify-center gap-1.5 text-gray-300 text-[12px] sm:text-[13.5px] font-medium font-bodyNew w-max opacity-0 md:absolute md:top-4">
               <span class="text-[13px] sm:text-[14px]">⚡</span> 
               <span>Limited early access closes soon</span>
@@ -968,7 +969,7 @@
       if (isAlreadyRegistered) {
           
           // GSAP Setup to ensure starting state continuity
-          gsap.set('#bg-image', { filter: 'brightness(1) contrast(1)', scale: 1.05 });
+          gsap.set('#bg-image', { opacity: 1, scale: 1 });
 
           // Play Entrance Animations for "Already Registered" Card
           const tl = gsap.timeline({ delay: 0.2 });
@@ -979,46 +980,59 @@
       } else {
 
           /* ==================================================
-             1. COVER PAGE INTRO ANIMATION (First time visitors)
+             1. COVER PAGE INTRO ANIMATION (Highly Optimized)
              ================================================== */
           const tl = gsap.timeline();
 
-          // Background Initial
-          gsap.set('#bg-image', { scale: 1.35, filter: 'brightness(0.15) contrast(1.4)' });
-          // Cover UI Initials
-          gsap.set('.line-element', { y: "105%" });
-          gsap.set('.logo-anim', { opacity: 0, y: -150, scale: 0.75, rotate: -12 });
-          gsap.set('.logo-anim span', { opacity: 0, scale: 0.4 });
-          gsap.set('.hero-subtext', { opacity: 0, y: 30 });
+          // SETUP: Hardware-accelerated starting positions
+          // Note: We avoid heavy CSS 'filter' here. We use pure opacity and scale for the BG.
+          gsap.set('#bg-image', { opacity: 0, scale: 1.1 }); 
+          
+          // The Premium Mask Setup: Push text 105% down so it hides behind the overflow wrapper
+          gsap.set('.line-element', { y: "105%" }); 
+          
+          gsap.set('.logo-anim', { opacity: 0, y: -20 });
+          gsap.set('.hero-subtext', { opacity: 0, y: 20 });
           gsap.set('.social-proof', { opacity: 1 });
-          gsap.set('.avatar', { opacity: 0, scale: 0, x: -25, rotate: -45 });
-          gsap.set('.highlighter-pill', { opacity: 0, scale: 1 });
+          gsap.set('.avatar', { opacity: 0, scale: 0, x: -20, rotate: -25 }); // Reduced rotation math for cheap GPUs
+          gsap.set('.highlighter-pill', { opacity: 0, scale: 0.8 }); // Simpler scale instead of heavy 3D transforms
           gsap.set('.registered-label', { opacity: 0, x: 15 });
-          gsap.set('.cta-btn', { opacity: 0, scale: 0.85, y: 35 });
+          gsap.set('.cta-btn', { opacity: 0, scale: 0.9, y: 20 });
           gsap.set('.fomo-text', { opacity: 0, y: 10 });
           gsap.set('.copyright-text', { opacity: 0 });
 
-          // Play Intro
-          tl.to('.logo-anim', { opacity: 1, y: 0, scale: 1, rotate: 0, duration: 2.0, ease: 'expo.out' }, '+=0.1');
-          tl.to('.logo-anim span', { opacity: 1, scale: 1, duration: 1.4, ease: 'power4.out' }, '-=1.7');
-          tl.fromTo('.location-label', { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 1.4, ease: 'power4.out' }, '-=1.2');
-          tl.to('.line-element', { y: "0%", duration: 1.9, stagger: 0.22, ease: 'expo.out' }, '-=1.2');
-          tl.to('.hero-subtext', { opacity: 1, y: 0, duration: 1.5, ease: 'power3.out' }, '-=1.4');
-          tl.addLabel('socialReveal', '-=1.2');
-          tl.to('.avatar', { opacity: 1, scale: 1, x: 0, rotate: 0, duration: 1.1, stagger: 0.12, ease: 'back.out(1.8)' }, 'socialReveal');
-          tl.to('.highlighter-pill', { opacity: 1, y: 0, duration: 1.3, ease: 'back.out(2.0)' }, 'socialReveal+=0.4');
-          tl.to('.registered-label', { opacity: 1, x: 0, duration: 1.3, ease: 'power4.out' }, 'socialReveal+=0.4');
+          // TIMELINE: The Sequence
+          // 1. Fade in Background smoothly via GPU
+          tl.to('#bg-image', { opacity: 1, scale: 1, duration: 2.5, ease: 'power2.out' }, 0);
+
+          // 2. Bring down Logo and Location
+          tl.to('.logo-anim', { opacity: 1, y: 0, duration: 1.2, ease: 'power3.out' }, 0.2);
+          tl.fromTo('.location-label', { opacity: 0, y: 15 }, { opacity: 1, y: 0, duration: 1.2, ease: 'power3.out' }, 0.3);
           
+          // 3. THE PREMIUM TITLE REVEAL (Hardware Accelerated Mask Slide)
+          // We use 'expo.out' for a dramatic snap, staggering slightly for a fluid feel.
+          tl.to('.line-element', { y: "0%", duration: 1.6, stagger: 0.1, ease: 'expo.out' }, 0.5);
+          
+          // 4. Subtext fade up
+          tl.to('.hero-subtext', { opacity: 1, y: 0, duration: 1.2, ease: 'power3.out' }, 0.7);
+          
+          // 5. Social Proof pop-ins
+          tl.addLabel('socialReveal', 0.9);
+          tl.to('.avatar', { opacity: 1, scale: 1, x: 0, rotate: 0, duration: 0.8, stagger: 0.08, ease: 'back.out(1.5)' }, 'socialReveal');
+          tl.to('.highlighter-pill', { opacity: 1, scale: 1, duration: 0.8, ease: 'back.out(1.5)' }, 'socialReveal+=0.3');
+          tl.to('.registered-label', { opacity: 1, x: 0, duration: 0.8, ease: 'power3.out' }, 'socialReveal+=0.3');
+          
+          // 6. Number Counter (This runs purely in JS, very cheap)
           const countObj = { val: 0 };
           tl.to(countObj, {
-            val: 2564, duration: 2.2, ease: "power3.out",
+            val: 2564, duration: 2.0, ease: "power3.out",
             onUpdate: function() { document.getElementById('registered-count').innerText = Math.round(countObj.val).toLocaleString(); }
-          }, 'socialReveal+=0.4');
+          }, 'socialReveal+=0.2');
           
-          tl.to('.cta-btn', { opacity: 1, scale: 1, y: 0, duration: 1.8, ease: 'back.out(1.4)' }, '-=1.3');
-          tl.to('.fomo-text', { opacity: 1, y: 0, duration: 1.2, ease: 'power4.out' }, '-=1.5');
-          tl.to('.copyright-text', { opacity: 1, duration: 1.5, ease: 'power4.out' }, '-=1.5');
-          tl.to('#bg-image', { scale: 1.05, filter: 'brightness(1) contrast(1)', duration: 3.2, ease: 'power4.out' }, 0);
+          // 7. Final Action Elements
+          tl.to('.cta-btn', { opacity: 1, scale: 1, y: 0, duration: 1.2, ease: 'back.out(1.2)' }, 1.3);
+          tl.to('.fomo-text', { opacity: 1, y: 0, duration: 1.0, ease: 'power3.out' }, 1.5);
+          tl.to('.copyright-text', { opacity: 1, duration: 1.5, ease: 'power3.out' }, 1.5);
       }
 
       /* ==================================================
