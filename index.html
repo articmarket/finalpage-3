@@ -322,10 +322,10 @@
 
     .field { position: relative; width: 100%; opacity: 0; }
     .field-inner {
-      position: relative; height: 60px; background: #f8faf8; border-radius: 14px; border: 1.5px solid #e5e9e5;
+      position: relative; height: 60px; background: #f8faf8; border-radius: 99px; border: 1.5px solid #e5e9e5;
       display: flex; align-items: center; overflow: hidden; transition: border-color 0.2s, background 0.2s, box-shadow 0.2s; cursor: text;
     }
-    @media(min-width: 640px) { .field-inner { height: 68px; border-radius: 16px; } }
+    @media(min-width: 640px) { .field-inner { height: 68px; border-radius: 99px; } }
     .field-inner:focus-within { border-color: var(--green-light); background: #fff; box-shadow: 0 0 0 4px rgba(34,197,94,0.1); }
 
     .field-icon { width: 48px; height: 100%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
@@ -334,10 +334,10 @@
     .field-inner:focus-within .field-icon svg { color: var(--green); }
 
     .field-phone-prefix {
-      display: flex; align-items: center; gap: 6px; padding: 0 12px 0 14px; height: 100%;
+      display: flex; align-items: center; gap: 6px; padding: 0 12px 0 16px; height: 100%;
       border-right: 1.5px solid #e5e9e5; flex-shrink: 0; transition: border-color 0.2s;
     }
-    @media(min-width: 640px) { .field-phone-prefix { padding: 0 14px 0 18px; } }
+    @media(min-width: 640px) { .field-phone-prefix { padding: 0 14px 0 20px; } }
     .field-inner:focus-within .field-phone-prefix { border-color: #c8e6c9; }
     
     .field-phone-prefix img { width: 18px; height: auto; border-radius: 2px; }
@@ -377,32 +377,32 @@
     @media(min-width: 640px) { input.field-input.phone { padding: 0 14px 8px 14px; } }
 
     .field-check {
-      position: absolute; right: 14px; top: 50%; transform: translateY(-50%); width: 18px; height: 18px;
+      position: absolute; right: 16px; top: 50%; transform: translateY(-50%); width: 18px; height: 18px;
       border-radius: 50%; background: var(--green-light); display: flex; align-items: center; justify-content: center;
       opacity: 0; transition: opacity 0.2s; flex-shrink: 0;
     }
-    @media(min-width: 640px) { .field-check { right: 16px; width: 20px; height: 20px; } }
+    @media(min-width: 640px) { .field-check { right: 20px; width: 20px; height: 20px; } }
     
     .field-check.visible { opacity: 1; }
     .field-check svg { color: white; width: 10px; height: 10px; }
     @media(min-width: 640px) { .field-check svg { width: 11px; height: 11px; } }
 
     .submit-btn {
-      width: 100%; height: 60px; background: var(--ink); color: var(--white); border: none; border-radius: 14px;
+      width: 100%; height: 60px; background: var(--ink); color: var(--white); border: none; border-radius: 99px;
       font-family: 'Plus Jakarta Sans', sans-serif; font-size: 16px; font-weight: 700; letter-spacing: 0.03em; cursor: pointer;
       display: flex; align-items: center; justify-content: center; gap: 8px; transition: all 0.25s ease; opacity: 0;
     }
-    @media(min-width: 640px) { .submit-btn { height: 64px; border-radius: 16px; gap: 10px; font-size: 17px; } }
+    @media(min-width: 640px) { .submit-btn { height: 64px; border-radius: 99px; gap: 10px; font-size: 17px; } }
     @media(min-width: 768px) { .submit-btn { height: 68px; font-size: 18px; } }
     
     .submit-btn:hover { transform: translateY(-2px); box-shadow: 0 12px 32px rgba(15,26,13,0.4); }
     .submit-btn:active { transform: scale(0.98); }
     
     .submit-btn .btn-badge {
-      width: 22px; height: 22px; border-radius: 6px; background: var(--yellow);
+      width: 22px; height: 22px; border-radius: 50%; background: var(--yellow);
       display: flex; align-items: center; justify-content: center; flex-shrink: 0;
     }
-    @media(min-width: 640px) { .submit-btn .btn-badge { width: 24px; height: 24px; border-radius: 8px; } }
+    @media(min-width: 640px) { .submit-btn .btn-badge { width: 24px; height: 24px; border-radius: 50%; } }
     
     .submit-btn .btn-badge svg { color: var(--ink); width: 12px; height: 12px; }
     @media(min-width: 640px) { .submit-btn .btn-badge svg { width: 13px; height: 13px; } }
@@ -727,10 +727,14 @@
 
                 <div class="pt-[26px] sm:pt-8 w-full max-sm:absolute max-sm:bottom-7 max-sm:left-0 max-sm:w-full max-sm:px-6 max-sm:pt-0 max-sm:!mt-0">
                     <button type="submit" class="submit-btn" id="submitBtn">
-                        <span>Complete Registration</span>
-                        <div class="btn-badge">
+                        <span id="btnText">Complete Registration</span>
+                        <div id="btnBadge" class="btn-badge">
                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg>
                         </div>
+                        <svg id="btnSpinner" class="hidden animate-spin h-5 w-5 text-[#facc15]" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                            <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                            <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                        </svg>
                     </button>
                     
                     <div class="trust-row mt-[28px] sm:mt-[20px]">
@@ -1117,40 +1121,71 @@
     document.getElementById('regForm').addEventListener('submit', function(e) {
         e.preventDefault();
 
-        // Register that the user has completed the flow.
-        // This will persist in browser data, showing the "Already Registered" UI upon refresh/revisit.
-        localStorage.setItem('artic_registered', 'true');
+        // ----------------------------------------------------
+        //  SUBMITTING ANIMATION LOGIC 
+        // ----------------------------------------------------
+        const submitBtn = document.getElementById('submitBtn');
+        const btnText = document.getElementById('btnText');
+        const btnBadge = document.getElementById('btnBadge');
+        const btnSpinner = document.getElementById('btnSpinner');
 
-        // Swap visibility
-        document.getElementById('page-form').classList.replace('visible-page', 'hidden-page');
-        document.getElementById('page-ending').classList.replace('hidden-page', 'visible-page');
+        // Set button to Submitting state
+        btnText.innerText = 'Submitting...';
+        btnBadge.style.display = 'none';
+        btnSpinner.classList.remove('hidden');
+        submitBtn.style.pointerEvents = 'none';
+        
+        // Add Tailwind pulsing animation
+        submitBtn.classList.add('animate-pulse');
 
-        // Play Success Page Animations Timeline
-        const tl = gsap.timeline();
+        // Fake network delay (e.g., 1.8 seconds) before triggering the success popup
+        setTimeout(() => {
+            
+            // Register that the user has completed the flow.
+            // This will persist in browser data, showing the "Already Registered" UI upon refresh/revisit.
+            localStorage.setItem('artic_registered', 'true');
 
-        tl.to("#page-ending-card", { opacity: 1, y: 0, duration: 1.5, ease: "power4.out", delay: 0.3 })
-          .to("#success-wrapper", { height: "auto", opacity: 1, duration: 1.0, ease: "power4.inOut" }, "<")
-          .to("#success-inner", { y: 0, duration: 1.0, ease: "power4.out" }, "<0.1") 
-          
-          .to(["#checkmark-circle", ".pulse-ring-form"], { scale: 1, duration: 0.5, ease: "back.out(1.6)" }, "-=0.3")
-          .to("#checkmark-tick", { strokeDashoffset: 0, duration: 0.35, ease: "power2.out" }, "<0.1")
-          .to(".success-stagger", { opacity: 1, y: 0, duration: 0.45, stagger: 0.1, ease: "power2.out" }, "-=0.1")
-          .add(() => {
-              // Now pops down from the "Your wholesale access is fully secured." text
-              confetti({ particleCount: 130, spread: 80, origin: { y: 0.62, x: 0.5 }, colors: ['#ef4444', '#3b82f6', '#facc15', '#22c55e', '#a855f7', '#ec4899'] });
-          }, "-=0.2")
-          
-          .to({}, { duration: 1.0 }) // Pause to read "Thank You"
-          .addLabel("showReward")
-          
-          .to("#reward-wrapper", { height: "auto", duration: 1.4, ease: "power4.inOut" }, "showReward")
-          .to("#reward-inner", { y: 0, duration: 1.4, ease: "power4.inOut" }, "showReward")
-          .to("#reward-wrapper", { opacity: 1, duration: 1.0, ease: "power2.out" }, "showReward+=0.4")
-          
-          .add(() => {
-              document.getElementById('highlight-trigger').classList.add('active');
-          }, "showReward+=1.2")
-          .to("#page-ending .countdown-popup", { opacity: 1, scale: 1, y: 0, duration: 0.6, ease: "back.out(1.6)" }, "showReward+=1.5");
+            // Swap visibility
+            document.getElementById('page-form').classList.replace('visible-page', 'hidden-page');
+            document.getElementById('page-ending').classList.replace('hidden-page', 'visible-page');
+
+            // Play Success Page Animations Timeline
+            const tl = gsap.timeline();
+
+            tl.to("#page-ending-card", { opacity: 1, y: 0, duration: 1.5, ease: "power4.out", delay: 0.3 })
+              .to("#success-wrapper", { height: "auto", opacity: 1, duration: 1.0, ease: "power4.inOut" }, "<")
+              .to("#success-inner", { y: 0, duration: 1.0, ease: "power4.out" }, "<0.1") 
+              
+              .to(["#checkmark-circle", ".pulse-ring-form"], { scale: 1, duration: 0.5, ease: "back.out(1.6)" }, "-=0.3")
+              .to("#checkmark-tick", { strokeDashoffset: 0, duration: 0.35, ease: "power2.out" }, "<0.1")
+              .to(".success-stagger", { opacity: 1, y: 0, duration: 0.45, stagger: 0.1, ease: "power2.out" }, "-=0.1")
+              .add(() => {
+                  // Now pops down from the "Your wholesale access is fully secured." text
+                  confetti({ particleCount: 130, spread: 80, origin: { y: 0.62, x: 0.5 }, colors: ['#ef4444', '#3b82f6', '#facc15', '#22c55e', '#a855f7', '#ec4899'] });
+              }, "-=0.2")
+              
+              .to({}, { duration: 1.0 }) // Pause to read "Thank You"
+              .addLabel("showReward")
+              
+              .to("#reward-wrapper", { height: "auto", duration: 1.4, ease: "power4.inOut" }, "showReward")
+              .to("#reward-inner", { y: 0, duration: 1.4, ease: "power4.inOut" }, "showReward")
+              .to("#reward-wrapper", { opacity: 1, duration: 1.0, ease: "power2.out" }, "showReward+=0.4")
+              
+              .add(() => {
+                  document.getElementById('highlight-trigger').classList.add('active');
+              }, "showReward+=1.2")
+              .to("#page-ending .countdown-popup", { opacity: 1, scale: 1, y: 0, duration: 0.6, ease: "back.out(1.6)" }, "showReward+=1.5");
+
+            // Clean up button state in the background
+            setTimeout(() => {
+                btnText.innerText = 'Complete Registration';
+                btnBadge.style.display = 'flex';
+                btnSpinner.classList.add('hidden');
+                submitBtn.classList.remove('animate-pulse');
+                submitBtn.style.pointerEvents = 'auto';
+            }, 1000);
+
+        }, 1800);
     });
   </script>
 </body>
