@@ -167,7 +167,7 @@
     .hero-subtext {
       font-family: 'Outfit', sans-serif;           
       line-height: 1.625; text-align: center; max-width: 750px;
-      margin: 1rem auto 2.5rem auto;      
+      margin: 13px auto 43px auto;      
       padding-left: 1rem; padding-right: 1rem;
       filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.9)); opacity: 0;                   
     }
@@ -268,7 +268,7 @@
     
     .social-text { 
       font-family: var(--font-body); 
-      font-size: 0.85rem; 
+      font-size: 0.9rem; 
       color: rgba(255,255,255,0.9); 
       font-weight: 600; 
     }
@@ -276,7 +276,17 @@
     .social-highlight { 
       color: var(--color-primary-yellow); 
       font-weight: 800; 
-      font-size: 0.95rem; 
+      font-size: 1.1rem; 
+      margin-right: 0.35rem; /* Gap between the number and text */
+    }
+
+    @media (min-width: 1024px) {
+      .social-text {
+        font-size: 0.9rem;
+      }
+      .social-highlight {
+        font-size: 1rem;
+      }
     }
 
     @media (max-width: 767px) {
@@ -1214,4 +1224,4 @@
     });
   </script>
 </body>
-</html>s
+</html>
